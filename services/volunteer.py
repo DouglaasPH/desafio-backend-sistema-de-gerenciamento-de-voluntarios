@@ -25,7 +25,7 @@ def list_volunteer(filters: FiltersVolunteer) -> List[Volunteer]:
 def get_volunteer(volunteer_id: int) -> Volunteer:
     result = repo.get_volunteer(volunteer_id)
     
-    if result == {}:
+    if result is None:
         raise HTTPException(status_code=404, detail="Not found") 
     else:
         return result
@@ -34,7 +34,7 @@ def get_volunteer(volunteer_id: int) -> Volunteer:
 def update_volunteer(volunteer_id: int, data: UpdateVolunteer) -> Volunteer:
     result = repo.update_volunteer(volunteer_id, data)
     
-    if result == {}:
+    if result is None:
         raise HTTPException(status_code=404, detail="Volunteer not found") 
     else:
         return result
@@ -43,7 +43,7 @@ def update_volunteer(volunteer_id: int, data: UpdateVolunteer) -> Volunteer:
 def delete_volunteer(volunteer_id: int) -> Volunteer:
     result = repo.delete_volunteer(volunteer_id)
     
-    if result == {}:
+    if result is None:
         raise HTTPException(status_code=404, detail="Volunteer not found") 
     else:
         return result

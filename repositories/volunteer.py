@@ -33,21 +33,19 @@ def filter_volunteer(filters: FiltersVolunteer) -> List[Volunteer]:
     return results
 
 
-def get_volunteer(volunteer_id: int) -> Volunteer:
-    results = {}
-    
+def get_volunteer(volunteer_id: int) -> Volunteer | None:
     for volunteer in db:
         if volunteer.id == volunteer_id:
-            results = volunteer
-            
-    return results
+            return volunteer
+    return None
+
 
 
 def update_volunteer(volunteer_id: int, data: UpdateVolunteer) -> Volunteer:
     volunteer = get_volunteer(volunteer_id)
     
     if volunteer is None:
-        return {}
+        return volunteer
     
     volunteer.nome = data.nome if data.nome is not None else volunteer.nome
     volunteer.email = data.email if data.email is not None else volunteer.email
@@ -62,8 +60,8 @@ def update_volunteer(volunteer_id: int, data: UpdateVolunteer) -> Volunteer:
 def delete_volunteer(volunteer_id: int) -> Volunteer:
     volunteer = get_volunteer(volunteer_id)
     
-    if volunteer == {}:
-        return {}
+    if volunteer is None:
+        return volunteer
     
     volunteer.status = False
     
