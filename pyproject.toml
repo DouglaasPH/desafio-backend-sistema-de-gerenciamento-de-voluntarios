@@ -12,6 +12,8 @@ dependencies = [
     "pydantic[email] (>=2.12.4,<3.0.0)",
     "uvicorn (>=0.38.0,<0.39.0)"
 ]
+[tool.black]
+line-length = 79
 [tool.taskipy.tasks]
 run = "uvicorn main:app --reload"
 test = "poetry run pytest"
@@ -27,4 +29,5 @@ pytest = "^9.0.1"
 httpx = "^0.28.1"
 taskipy = "^1.14.1"
 flake8 = "^7.3.0"
+black = "^25.11.0"
 
