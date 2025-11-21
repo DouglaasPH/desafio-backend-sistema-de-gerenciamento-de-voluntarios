@@ -1,6 +1,6 @@
 from typing import List
 from database import db
-from models.volunteer import Volunteer, CreateVolunteer, FiltersVolunteer
+from models.volunteer import Volunteer, CreateVolunteer, FiltersVolunteer, UpdateVolunteer
 
 def add_volunteer(vol: CreateVolunteer) -> Volunteer:
     new_volunteer = Volunteer(
@@ -41,3 +41,19 @@ def get_volunteer(volunteer_id: int) -> Volunteer:
             results = volunteer
             
     return results
+
+
+def update_volunteer(volunteer_id: int, data: UpdateVolunteer) -> Volunteer:
+    volunteer = get_volunteer(volunteer_id)
+    
+    if volunteer is None:
+        return {}
+    
+    volunteer.nome = data.nome if data.nome is not None else volunteer.nome
+    volunteer.email = data.email if data.email is not None else volunteer.email
+    volunteer.cargo_pretendido = data.cargo_pretendido if data.cargo_pretendido is not None else volunteer.cargo_pretendido
+    volunteer.disponibilidade = data.disponibilidade if data.disponibilidade is not None else volunteer.disponibilidade
+    
+    db[volunteer_id - 1] = volunteer
+    
+    return volunteer

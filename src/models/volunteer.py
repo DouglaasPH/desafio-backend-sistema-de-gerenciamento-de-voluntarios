@@ -26,11 +26,10 @@ class CreateVolunteer(BaseModel):
     
 
 class UpdateVolunteer(BaseModel):
-    id: Optional[int]
-    nome: Optional[str]
-    email: Optional[EmailStr]
-    cargo_pretendido: Optional[str]
-    disponibilidade: Optional[OpcoesDeDisponibilidade]    
+    nome: Optional[str] = None
+    email: Optional[EmailStr] = None
+    cargo_pretendido: Optional[str] = None
+    disponibilidade: Optional[OpcoesDeDisponibilidade] = None
 
 
 class FiltersVolunteer(BaseModel):

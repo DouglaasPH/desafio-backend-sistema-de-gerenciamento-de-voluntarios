@@ -2,7 +2,7 @@ from fastapi import HTTPException
 from typing import List
 
 from database import db
-from models.volunteer import Volunteer, CreateVolunteer, FiltersVolunteer
+from models.volunteer import Volunteer, CreateVolunteer, FiltersVolunteer, UpdateVolunteer
 import repositories.volunteer as repo
 
 def create_volunteer(vol: CreateVolunteer) -> Volunteer:
@@ -27,5 +27,14 @@ def get_volunteer(volunteer_id: int) -> Volunteer:
     
     if result == {}:
         raise HTTPException(status_code=404, detail="Not found") 
+    else:
+        return result
+    
+
+def update_volunteer(volunteer_id: int, data: UpdateVolunteer) -> Volunteer:
+    result = repo.update_volunteer(volunteer_id, data)
+    
+    if result == {}:
+        raise HTTPException(status_code=404, detail="Volunteer not found") 
     else:
         return result
