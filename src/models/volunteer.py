@@ -34,5 +34,6 @@ class UpdateVolunteer(BaseModel):
 
 
 class FiltersVolunteer(BaseModel):
-    cargo_pretendido: Optional[str]
-    disponibilidade: Optional[OpcoesDeDisponibilidade]
+    status: Optional[bool] = None
+    cargo_pretendido: Optional[str] = None
+    disponibilidade: Optional[OpcoesDeDisponibilidade] = None
