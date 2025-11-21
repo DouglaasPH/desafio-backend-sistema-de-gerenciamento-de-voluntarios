@@ -29,3 +29,8 @@ def update_volunteer(volunteer_id: int, data: Optional[UpdateVolunteer] = None):
         raise HTTPException(status_code=400, detail="No data provided for update")
     
     return service.update_volunteer(volunteer_id, data)
+
+
+@router.delete("/volunteer/{volunteer_id}", response_model=Volunteer)
+def delete_volunteer(volunteer_id: int):
+    return service.delete_volunteer(volunteer_id)

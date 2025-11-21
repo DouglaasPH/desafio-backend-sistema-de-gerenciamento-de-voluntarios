@@ -38,3 +38,12 @@ def update_volunteer(volunteer_id: int, data: UpdateVolunteer) -> Volunteer:
         raise HTTPException(status_code=404, detail="Volunteer not found") 
     else:
         return result
+
+
+def delete_volunteer(volunteer_id: int) -> Volunteer:
+    result = repo.delete_volunteer(volunteer_id)
+    
+    if result == {}:
+        raise HTTPException(status_code=404, detail="Volunteer not found") 
+    else:
+        return result

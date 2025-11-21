@@ -57,3 +57,16 @@ def update_volunteer(volunteer_id: int, data: UpdateVolunteer) -> Volunteer:
     db[volunteer_id - 1] = volunteer
     
     return volunteer
+
+
+def delete_volunteer(volunteer_id: int) -> Volunteer:
+    volunteer = get_volunteer(volunteer_id)
+    
+    if volunteer == {}:
+        return {}
+    
+    volunteer.status = False
+    
+    db[volunteer_id - 1] = volunteer
+    
+    return volunteer
