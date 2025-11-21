@@ -42,7 +42,8 @@ Para executar a aplicação localmente:
 poetry run task run
 ```
 
-A aplicação será executada em `http://127.0.0.1:8000` com **hot reload**.
+A aplicação estará disponível em `http://127.0.0.1:8000` com **hot reload**.  
+A documentação interativa do Swagger pode ser acessada em `http://127.0.0.1:8000/docs`.
 
 ---
 
