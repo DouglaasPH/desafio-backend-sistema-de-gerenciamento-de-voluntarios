@@ -17,8 +17,8 @@ def add_volunteer(vol: CreateVolunteer) -> Volunteer:
 
 def filter_volunteer(filters: FiltersVolunteer) -> List[Volunteer]:
     results = []
-    
-    for volunteer in db:
+       
+    for volunteer in db:            
         if filters.status is not None and volunteer.status != filters.status:
             continue
         
@@ -29,5 +29,15 @@ def filter_volunteer(filters: FiltersVolunteer) -> List[Volunteer]:
             continue
         
         results.append(volunteer)
+            
+    return results
+
+
+def get_volunteer(volunteer_id: int) -> Volunteer:
+    results = {}
     
+    for volunteer in db:
+        if volunteer.id == volunteer_id:
+            results = volunteer
+            
     return results
