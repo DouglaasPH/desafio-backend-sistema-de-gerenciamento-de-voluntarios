@@ -5,7 +5,7 @@ from models.volunteer import (
     Volunteer,
     CreateVolunteer,
     FiltersVolunteer,
-    UpdateVolunteer
+    UpdateVolunteer,
 )
 import services.volunteer as service
 
@@ -32,21 +32,16 @@ def get_volunteer(volunteer_id: int):
 
 @router.put("/volunteer/{volunteer_id}", response_model=Volunteer)
 def update_volunteer(
-    volunteer_id: int,
-    data: Optional[UpdateVolunteer] = None
+    volunteer_id: int, data: Optional[UpdateVolunteer] = None
 ):
-    if (
-        data is None
-        or (
-            data.nome is None
-            and data.email is None
-            and data.cargo_pretendido is None
-            and data.disponibilidade is None
-        )
+    if data is None or (
+        data.nome is None
+        and data.email is None
+        and data.cargo_pretendido is None
+        and data.disponibilidade is None
     ):
         raise HTTPException(
-            status_code=400,
-            detail="No data provided for update"
+            status_code=400, detail="No data provided for update"
         )
 
     return service.update_volunteer(volunteer_id, data)

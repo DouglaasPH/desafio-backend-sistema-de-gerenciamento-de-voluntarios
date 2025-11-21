@@ -6,17 +6,14 @@ from models.volunteer import (
     Volunteer,
     CreateVolunteer,
     FiltersVolunteer,
-    UpdateVolunteer
+    UpdateVolunteer,
 )
 import repositories.volunteer as repo
 
 
 def create_volunteer(vol: CreateVolunteer) -> Volunteer:
     if any(volunteer.email == vol.email for volunteer in db):
-        raise HTTPException(
-            status_code=400,
-            detail="Email already exists"
-        )
+        raise HTTPException(status_code=400, detail="Email already exists")
     return repo.add_volunteer(vol)
 
 

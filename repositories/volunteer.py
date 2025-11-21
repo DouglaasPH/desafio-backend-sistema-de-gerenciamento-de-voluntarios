@@ -4,7 +4,7 @@ from models.volunteer import (
     Volunteer,
     CreateVolunteer,
     FiltersVolunteer,
-    UpdateVolunteer
+    UpdateVolunteer,
 )
 
 
@@ -14,7 +14,7 @@ def add_volunteer(vol: CreateVolunteer) -> Volunteer:
         nome=vol.nome,
         email=vol.email,
         cargo_pretendido=vol.cargo_pretendido,
-        disponibilidade=vol.disponibilidade
+        disponibilidade=vol.disponibilidade,
     )
     db.append(new_volunteer)
     return new_volunteer
@@ -28,14 +28,14 @@ def filter_volunteer(filters: FiltersVolunteer) -> List[Volunteer]:
             continue
 
         if (
-            filters.cargo_pretendido is not None and
-            volunteer.cargo_pretendido != filters.cargo_pretendido
+            filters.cargo_pretendido is not None
+            and volunteer.cargo_pretendido != filters.cargo_pretendido
         ):
             continue
 
         if (
-            filters.disponibilidade is not None and
-            volunteer.disponibilidade != filters.disponibilidade
+            filters.disponibilidade is not None
+            and volunteer.disponibilidade != filters.disponibilidade
         ):
             continue
 
@@ -63,12 +63,12 @@ def update_volunteer(volunteer_id: int, data: UpdateVolunteer) -> Volunteer:
         data.cargo_pretendido
         if data.cargo_pretendido is not None
         else volunteer.cargo_pretendido
-        )
+    )
     volunteer.disponibilidade = (
         data.disponibilidade
         if data.disponibilidade is not None
         else volunteer.disponibilidade
-        )
+    )
 
     db[volunteer_id - 1] = volunteer
 
