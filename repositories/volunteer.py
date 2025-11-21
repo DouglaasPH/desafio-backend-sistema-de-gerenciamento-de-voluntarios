@@ -5,6 +5,7 @@ from models.volunteer import (
     CreateVolunteer,
     FiltersVolunteer,
     UpdateVolunteer,
+    StatusOptions
 )
 
 
@@ -81,7 +82,7 @@ def delete_volunteer(volunteer_id: int) -> Volunteer:
     if volunteer is None:
         return volunteer
 
-    volunteer.status = False
+    volunteer.status = StatusOptions.inativo
 
     db[volunteer_id - 1] = volunteer
 

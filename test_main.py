@@ -92,7 +92,7 @@ def test_list_volunteer():
     )
 
     second_response = client.get(
-        "/volunteer", params={"status": True, "disponibilidade": "manha"}
+        "/volunteer", params={"status": "ativo", "disponibilidade": "manha"}
     )
 
     assert second_response.status_code == 200
@@ -105,7 +105,7 @@ def test_list_volunteer():
 def test_list_volunteer_error_404():
     db.clear()
     response = client.get(
-        "/volunteer", params={"status": False, "disponibilidade": "tarde"}
+        "/volunteer", params={"status": "inativo", "disponibilidade": "tarde"}
     )
 
     assert response.status_code == 404
