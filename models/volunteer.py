@@ -3,10 +3,12 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional
 from enum import Enum
 
+
 class OpcoesDeDisponibilidade(str, Enum):
     manha = "manha"
     tarde = "tarde"
     noite = "noite"
+
 
 class Volunteer(BaseModel):
     id: int
@@ -16,14 +18,14 @@ class Volunteer(BaseModel):
     disponibilidade: OpcoesDeDisponibilidade
     status: bool = True
     created_at: datetime = datetime.now()
-    
+
 
 class CreateVolunteer(BaseModel):
     nome: str
     email: EmailStr
     cargo_pretendido: str
     disponibilidade: OpcoesDeDisponibilidade
-    
+
 
 class UpdateVolunteer(BaseModel):
     nome: Optional[str] = None

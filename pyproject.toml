@@ -14,9 +14,9 @@ dependencies = [
 ]
 [tool.taskipy.tasks]
 run = "uvicorn main:app --reload"
-test = "pytest"
-lint = "flake8 ."
-format = "black ."
+test = "poetry run pytest"
+lint = "poetry run flake8 ."
+format = "poetry run black ."
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -26,4 +26,5 @@ build-backend = "poetry.core.masonry.api"
 pytest = "^9.0.1"
 httpx = "^0.28.1"
 taskipy = "^1.14.1"
+flake8 = "^7.3.0"
 
