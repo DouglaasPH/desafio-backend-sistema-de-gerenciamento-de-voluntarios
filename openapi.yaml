@@ -1,0 +1,260 @@
+openapi: 3.1.0
+info:
+  title: Sistema de Gerenciamento de Voluntarios
+  version: 0.1.0
+  description: API para gerenciamento de cadastro de voluntarios de uma organizacao.
+paths:
+  /volunteer:
+    post:
+      tags:
+        - Volunteers
+      summary: Cria um novo voluntario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateVolunteer"
+            example:
+              nome: "Douglas"
+              email: "douglas@email.com"
+              cargo_pretendido: "Backend Jr"
+              disponibilidade: "manha"
+      responses:
+        "200":
+          description: Voluntario criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Volunteer"
+        "400":
+          description: Email ja existe
+          content:
+            application/json:
+              example:
+                detail: "Email already exists"
+        "422":
+          description: Erro de validacao
+          content:
+            application/json:
+              $ref: "#/components/schemas/HTTPValidationError"
+    get:
+      tags:
+        - Volunteers
+      summary: Lista voluntarios com filtros
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: boolean
+          required: false
+          description: Filtra por status ativo/inativo
+        - in: query
+          name: disponibilidade
+          schema:
+            type: string
+            enum: [manha, tarde, noite]
+          required: false
+          description: Filtra por disponibilidade
+      responses:
+        "200":
+          description: Lista de voluntarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Volunteer"
+        "404":
+          description: Nenhum voluntario encontrado
+          content:
+            application/json:
+              example:
+                detail: "Not found"
+        "422":
+          description: Erro de validacao
+          content:
+            application/json:
+              $ref: "#/components/schemas/HTTPValidationError"
+
+  /volunteer/{volunteer_id}:
+    get:
+      tags:
+        - Volunteers
+      summary: Retorna voluntario por ID
+      parameters:
+        - in: path
+          name: volunteer_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Voluntario encontrado
+          content:
+            application/json:
+              $ref: "#/components/schemas/Volunteer"
+        "404":
+          description: Voluntario nao encontrado
+          content:
+            application/json:
+              example:
+                detail: "Not found"
+        "422":
+          description: Erro de validacao
+          content:
+            application/json:
+              $ref: "#/components/schemas/HTTPValidationError"
+    put:
+      tags:
+        - Volunteers
+      summary: Atualiza voluntario
+      parameters:
+        - in: path
+          name: volunteer_id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateVolunteer"
+            example:
+              nome: "Ed"
+              email: "ed@gmail.com"
+              cargo_pretendido: "Frontend Jr"
+              disponibilidade: "tarde"
+      responses:
+        "200":
+          description: Voluntario atualizado
+          content:
+            application/json:
+              $ref: "#/components/schemas/Volunteer"
+        "400":
+          description: Nenhum dado fornecido para atualizacao
+          content:
+            application/json:
+              example:
+                detail: "No data provided for update"
+        "404":
+          description: Voluntario nao encontrado
+          content:
+            application/json:
+              example:
+                detail: "Volunteer not found"
+        "422":
+          description: Erro de validacao
+          content:
+            application/json:
+              $ref: "#/components/schemas/HTTPValidationError"
+    delete:
+      tags:
+        - Volunteers
+      summary: Remove voluntario
+      parameters:
+        - in: path
+          name: volunteer_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Voluntario removido
+          content:
+            application/json:
+              $ref: "#/components/schemas/Volunteer"
+        "404":
+          description: Voluntario nao encontrado
+          content:
+            application/json:
+              example:
+                detail: "Volunteer not found"
+components:
+  schemas:
+    CreateVolunteer:
+      type: object
+      required:
+        - nome
+        - email
+        - cargo_pretendido
+        - disponibilidade
+      properties:
+        nome:
+          type: string
+        email:
+          type: string
+          format: email
+        cargo_pretendido:
+          type: string
+        disponibilidade:
+          type: string
+          enum: [manha, tarde, noite]
+    UpdateVolunteer:
+      type: object
+      properties:
+        nome:
+          type: string
+          nullable: true
+        email:
+          type: string
+          format: email
+          nullable: true
+        cargo_pretendido:
+          type: string
+          nullable: true
+        disponibilidade:
+          type: string
+          enum: [manha, tarde, noite]
+          nullable: true
+    Volunteer:
+      type: object
+      required:
+        - id
+        - nome
+        - email
+        - cargo_pretendido
+        - disponibilidade
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+        email:
+          type: string
+          format: email
+        cargo_pretendido:
+          type: string
+        disponibilidade:
+          type: string
+          enum: [manha, tarde, noite]
+        status:
+          type: boolean
+          default: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+    HTTPValidationError:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: "#/components/schemas/ValidationError"
+    ValidationError:
+      type: object
+      required: [loc, msg, type]
+      properties:
+        loc:
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          type: string
+        type:
+          type: string
