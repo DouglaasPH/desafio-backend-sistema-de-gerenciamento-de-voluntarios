@@ -10,7 +10,6 @@ requires-python = ">=3.13"
 dependencies = [
     "fastapi (>=0.121.3,<0.122.0)",
     "pydantic[email] (>=2.12.4,<3.0.0)",
-    "sqlalchemy (>=2.0.44,<3.0.0)",
     "uvicorn (>=0.38.0,<0.39.0)"
 ]
 
@@ -18,3 +17,8 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.0.1"
+httpx = "^0.28.1"
+
