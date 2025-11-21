@@ -1,6 +1,5 @@
 import yaml
 from fastapi import FastAPI
-from fastapi.openapi.utils import get_openapi
 
 from routes.volunteer import router as volunteer_router
 
