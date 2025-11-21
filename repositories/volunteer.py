@@ -5,7 +5,7 @@ from models.volunteer import (
     CreateVolunteer,
     FiltersVolunteer,
     UpdateVolunteer,
-    StatusOptions
+    StatusOptions,
 )
 
 
