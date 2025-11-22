@@ -5,14 +5,14 @@ from enum import Enum
 
 
 class StatusOptions(str, Enum):
-    ativo = "ativo"
-    inativo = "inativo"
+    ativo = "Ativo"
+    inativo = "Inativo"
 
 
 class AvailabilityOptions(str, Enum):
-    manha = "manha"
-    tarde = "tarde"
-    noite = "noite"
+    manha = "Manhã"
+    tarde = "Tarde"
+    noite = "Noite"
 
 
 class Volunteer(BaseModel):
