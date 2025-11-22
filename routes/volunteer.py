@@ -41,7 +41,7 @@ def update_volunteer(
         and data.disponibilidade is None
     ):
         raise HTTPException(
-            status_code=400, detail="No data provided for update"
+            status_code=400, detail="Nenhuma informação fornecida para atualização."
         )
 
     return service.update_volunteer(volunteer_id, data)
