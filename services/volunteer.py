@@ -12,7 +12,6 @@ import repositories.volunteer as repo
 
 
 def create_volunteer(vol: CreateVolunteer) -> Volunteer:
-    print(vol)
     if any(volunteer.email == vol.email for volunteer in db):
         raise HTTPException(status_code=400, detail="O email já existe.")
     return repo.add_volunteer(vol)
