@@ -1,9 +1,24 @@
 import yaml
+
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from routes.volunteer import router as volunteer_router
 
 app = FastAPI(title="Sistema de Gerenciamento de Voluntários")
+
+
+origins = [
+    "http://localhost:5173",  # endereço do seu frontend
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # ou ["*"] para liberar todos
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(volunteer_router)
 
