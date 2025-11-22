@@ -14,6 +14,7 @@ def add_volunteer(vol: CreateVolunteer) -> Volunteer:
         id=len(db) + 1,
         nome=vol.nome,
         email=vol.email,
+        telefone=vol.telefone,
         cargo_pretendido=vol.cargo_pretendido,
         disponibilidade=vol.disponibilidade,
     )
@@ -60,6 +61,7 @@ def update_volunteer(volunteer_id: int, data: UpdateVolunteer) -> Volunteer:
 
     volunteer.nome = data.nome if data.nome is not None else volunteer.nome
     volunteer.email = data.email if data.email is not None else volunteer.email
+    volunteer.telefone = data.telefone if data.telefone is not None else volunteer.telefone
     volunteer.cargo_pretendido = (
         data.cargo_pretendido
         if data.cargo_pretendido is not None

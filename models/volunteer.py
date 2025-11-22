@@ -19,6 +19,7 @@ class Volunteer(BaseModel):
     id: int
     nome: str
     email: EmailStr
+    telefone: str
     cargo_pretendido: str
     disponibilidade: AvailabilityOptions
     status: StatusOptions = StatusOptions.ativo
@@ -28,6 +29,7 @@ class Volunteer(BaseModel):
 class CreateVolunteer(BaseModel):
     nome: str
     email: EmailStr
+    telefone: str
     cargo_pretendido: str
     disponibilidade: AvailabilityOptions
 
@@ -35,6 +37,7 @@ class CreateVolunteer(BaseModel):
 class UpdateVolunteer(BaseModel):
     nome: Optional[str] = None
     email: Optional[EmailStr] = None
+    telefone: Optional[str] = None
     cargo_pretendido: Optional[str] = None
     disponibilidade: Optional[AvailabilityOptions] = None
 
