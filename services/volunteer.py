@@ -19,11 +19,7 @@ def create_volunteer(vol: CreateVolunteer) -> Volunteer:
 
 def list_volunteer(filters: FiltersVolunteer) -> List[Volunteer]:
     result = repo.filter_volunteer(filters)
-
-    if len(result) == 0:
-        raise HTTPException(status_code=404, detail="Não encontrado.")
-    else:
-        return result
+    return result
 
 
 def get_volunteer(volunteer_id: int) -> Volunteer:
