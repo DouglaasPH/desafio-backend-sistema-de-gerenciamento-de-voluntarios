@@ -9,7 +9,7 @@ app = FastAPI(title="Sistema de Gerenciamento de Voluntários")
 
 
 origins = [
-    "https://gerenciamento-de-voluntarios.vercel.app"
+    "https://sistema-de-gerenciamento-de-voluntarios.vercel.app/"
 ]
 
 app.add_middleware(
