@@ -9,7 +9,7 @@ app = FastAPI(title="Sistema de Gerenciamento de Voluntários")
 
 
 origins = [
-    "http://localhost:5173",  # endereço do seu frontend
+    "https://gerenciamento-de-voluntarios.vercel.app"
 ]
 
 app.add_middleware(
