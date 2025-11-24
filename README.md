@@ -53,7 +53,7 @@ A documentação interativa do Swagger pode ser acessada em `http://127.0.0.1:80
 | ------ | --------------------------- | ------------------------------------------ |
 | POST   | `/volunteer`                | Cria um novo voluntário                    |
 | GET    | `/volunteer`                | Lista voluntários (opcional com filtros)   |
-| GET    | `/volunteer/{volunteer_id}` | Retorna um voluntário específico pelo ID   |
+| GET    | `/volunteer/{volunteer_id}` | Retorna um voluntário com base no ID       |
 | PUT    | `/volunteer/{volunteer_id}` | Atualiza dados de um voluntário existente  |
 | DELETE | `/volunteer/{volunteer_id}` | Remove (soft delete) um voluntário pelo ID |
 
