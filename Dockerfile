@@ -1,23 +1,26 @@
-# Use Python 3.13 (ou 3.12 se 3.13 não estiver disponível)
+# Use a imagem base Python
 FROM python:3.13-slim
 
 # Defina o diretório de trabalho
 WORKDIR /app
 
-# Copia dependências + README
-COPY pyproject.toml poetry.lock* README.md /app/
+# Copie os arquivos de dependências
+COPY pyproject.toml poetry.lock /app/
 
-RUN pip install --upgrade pip \
-    && pip install poetry
+# Instale o Poetry
+RUN pip install --no-cache-dir poetry
 
-RUN poetry config virtualenvs.create false \
-    && poetry install --without dev
+# Configure o Poetry para não criar virtualenv
+RUN poetry config virtualenvs.create false
 
-# Copie todo o código
+# Instale apenas as dependências (sem instalar o projeto atual)
+RUN poetry install --without dev --no-root
+
+# Copie o restante do código
 COPY . /app
 
-# Porta que o Railway vai usar
-ENV PORT 8000
+# Exponha a porta que a aplicação vai usar
+EXPOSE 8000
 
-# Comando de start
+# Comando para rodar sua aplicação (exemplo FastAPI com uvicorn)
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
