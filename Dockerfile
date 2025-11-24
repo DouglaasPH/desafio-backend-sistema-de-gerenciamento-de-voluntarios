@@ -4,14 +4,12 @@ FROM python:3.13-slim
 # Defina o diretório de trabalho
 WORKDIR /app
 
-# Copie arquivos de dependências
-COPY pyproject.toml poetry.lock* /app/
+# Copia dependências + README
+COPY pyproject.toml poetry.lock* README.md /app/
 
-# Instale Poetry
 RUN pip install --upgrade pip \
     && pip install poetry
 
-# Instale dependências sem dev
 RUN poetry config virtualenvs.create false \
     && poetry install --without dev
 
