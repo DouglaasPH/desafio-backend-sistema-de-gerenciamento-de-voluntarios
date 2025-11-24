@@ -16,8 +16,7 @@ dependencies = [
 [tool.black]
 line-length = 79
 [tool.taskipy.tasks]
-run = "poetry run uvicorn main:app --host 0.0.0.0 --port $PORT
-"
+run = "poetry run uvicorn main:app --host 0.0.0.0 --port $PORT"
 test = "poetry run pytest"
 lint = "poetry run flake8 ."
 format = "poetry run black ."
