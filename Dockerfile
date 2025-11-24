@@ -13,7 +13,7 @@ RUN pip install --upgrade pip \
 
 # Instale dependências sem dev
 RUN poetry config virtualenvs.create false \
-    && poetry install --no-dev
+    && poetry install --without dev
 
 # Copie todo o código
 COPY . /app
